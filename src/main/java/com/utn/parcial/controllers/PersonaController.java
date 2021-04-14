@@ -28,6 +28,11 @@ public class PersonaController {
         return personaService.findAllRepresentantes();
     }
 
+    @GetMapping("/jugadores")
+    public List<Persona> findAllJugadores(){
+        return personaService.findAllJugadores();
+    }
+
     @GetMapping("/{id}")
     public Persona findById(@PathVariable Integer id){
         return personaService.findById(id);

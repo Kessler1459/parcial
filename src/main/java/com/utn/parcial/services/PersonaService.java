@@ -79,4 +79,8 @@ public class PersonaService {
         }
         return representantes;
     }
+
+    public List<Persona> findAllJugadores() {
+        return personaRepository.findAllJugadores();
+    }
 }
