@@ -74,7 +74,7 @@ public class PersonaService {
                 montoTotal+=monto;
                 pesoDeLaBoveda+=monto/100;
             }
-            rep.setMontoTotal(montoTotal);
+            rep.setMontoTotal(montoTotal*148);
             rep.setPesoDeLaBoveda(pesoDeLaBoveda);
         }
         return representantes;
