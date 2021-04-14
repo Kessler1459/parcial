@@ -2,10 +2,7 @@ package com.utn.parcial.services;
 
 
 import com.utn.parcial.exceptions.NotRepresentanteJugadorException;
-import com.utn.parcial.models.Currency;
-import com.utn.parcial.models.Jugador;
-import com.utn.parcial.models.Persona;
-import com.utn.parcial.models.Representante;
+import com.utn.parcial.models.*;
 import com.utn.parcial.repositories.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,10 +68,17 @@ public class PersonaService {
             Representante rep = (Representante) r;
             for (Jugador j : rep.getJugadores()) {
                 Float monto=j.getCurrency().getMonto();
+                if (j.getCurrency().getCurrencyType()== CurrencyType.DOLAR){
+                    monto=monto*148;
+                }else{
+                    monto=monto*171; //cotizacion recien sacadita eh
+                }
                 montoTotal+=monto;
                 pesoDeLaBoveda+=monto/100;
             }
-            rep.setMontoTotal(montoTotal*148);
+
+
+            rep.setMontoTotal(montoTotal);
             rep.setPesoDeLaBoveda(pesoDeLaBoveda);
         }
         return representantes;
