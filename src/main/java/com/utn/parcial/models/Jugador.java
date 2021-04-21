@@ -2,6 +2,7 @@ package com.utn.parcial.models;
 
 import lombok.Data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
@@ -23,7 +24,7 @@ public class Jugador extends Persona{
     @Min(0)
     @NotNull
     private Integer minutosJugados;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Currency currency;
     @NotNull
     private LocalDate fechaNacimiento;

@@ -13,8 +13,8 @@ import java.util.List;
 
 @Service
 public class PersonaService {
-    private PersonaRepository personaRepository;
-    private CurrencyService currencyService;
+    private final PersonaRepository personaRepository;
+    private final CurrencyService currencyService;
 
     @Autowired
     public PersonaService(PersonaRepository personaRepository, CurrencyService currencyService) {
@@ -61,27 +61,7 @@ public class PersonaService {
     }
 
     public List<Persona> findAllRepresentantes() {
-        List<Persona> representantes = personaRepository.findAllRepresentantes();
-        for (Persona r : representantes) {
-            Float montoTotal= Float.valueOf(0);
-            Float pesoDeLaBoveda=Float.valueOf(0);
-            Representante rep = (Representante) r;
-            for (Jugador j : rep.getJugadores()) {
-                Float monto=j.getCurrency().getMonto();
-                if (j.getCurrency().getCurrencyType()== CurrencyType.DOLAR){
-                    monto=monto*148;
-                }else{
-                    monto=monto*171; //cotizacion recien sacadita eh
-                }
-                montoTotal+=monto;
-                pesoDeLaBoveda+=monto/100;
-            }
-
-
-            rep.setMontoTotal(montoTotal);
-            rep.setPesoDeLaBoveda(pesoDeLaBoveda);
-        }
-        return representantes;
+        return personaRepository.findAllRepresentantes();
     }
 
     public List<Persona> findAllJugadores() {

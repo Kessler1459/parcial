@@ -1,12 +1,16 @@
 package com.utn.parcial.models;
 
 public enum CurrencyType {
-    EURO("Euros"),
-    DOLAR("Dolares");
+    EURO((float)170),
+    DOLAR((float)150);
 
-    private String code;
+    private Float value;
 
-    CurrencyType(String code) {
-        this.code = code;
+    CurrencyType(Float value) {
+        this.value = value;
+    }
+
+    public Float getValue() {
+        return value;
     }
 }
