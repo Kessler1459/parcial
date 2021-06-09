@@ -1,8 +1,7 @@
 package com.utn.parcial.models;
 
 
-import lombok.Data;
-
+import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +10,10 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 public class Currency {
     @Id
@@ -22,4 +24,5 @@ public class Currency {
     @NotNull
     @Min(0)
     private Float monto;
+
 }

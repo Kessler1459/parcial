@@ -2,13 +2,17 @@ package com.utn.parcial.models;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import lombok.Data;
-
+import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
+import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @JsonTypeInfo(property = "personType",visible = true,use = JsonTypeInfo.Id.NAME)
@@ -28,4 +32,13 @@ public abstract class Persona {
     private String lastName;
     @NotNull
     abstract PersonType personType();
+    @OneToMany(mappedBy = "cumplaniero",cascade = CascadeType.ALL,orphanRemoval = true)
+    @ToString.Exclude
+    private List<Cumpleanitos> cumples;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Currency currency;
+
+    @ManyToMany
+    private Set<Cumpleanitos> invitedTo;
+
 }

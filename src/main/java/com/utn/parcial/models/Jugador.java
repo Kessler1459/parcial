@@ -1,6 +1,7 @@
 package com.utn.parcial.models;
 
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,7 +11,10 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class Jugador extends Persona{
     @Min(10)
     @NotNull
@@ -24,8 +28,6 @@ public class Jugador extends Persona{
     @Min(0)
     @NotNull
     private Integer minutosJugados;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Currency currency;
     @NotNull
     private LocalDate fechaNacimiento;
 
