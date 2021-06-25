@@ -50,7 +50,7 @@ public abstract class Persona {
     @ToString.Exclude
     @JsonBackReference
     private List<Cumpleanitos> cumples;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "persona")
     private Currency currency;
     @JsonIgnore
     @ManyToMany(mappedBy = "invitados")
