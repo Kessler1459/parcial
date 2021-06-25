@@ -1,5 +1,6 @@
 package com.utn.parcial.exceptions;
 
+import com.utn.parcial.models.DTO.MessageDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,5 +22,10 @@ public class RestResponseEntityHandler {
         }
         ApiError apiError = new ApiError(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST, errors);
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
+
+    @ExceptionHandler(CurrencyApiException.class)
+    public ResponseEntity<MessageDTO> handleCurrencyApiError(CurrencyApiException e){
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(new MessageDTO(e.getMessage()));
     }
 }

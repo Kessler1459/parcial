@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 @ToString
 @RequiredArgsConstructor
 @Entity
+@AllArgsConstructor
 public class Currency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

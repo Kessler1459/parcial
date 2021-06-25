@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,6 +15,11 @@ import java.util.Set;
 @ToString
 @RequiredArgsConstructor
 public class Cumpleanitos {
+    public Cumpleanitos(LocalDate fecha) {
+        this.fecha = fecha;
+        invitados=new HashSet<>();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -24,7 +30,11 @@ public class Cumpleanitos {
     @JoinColumn(name = "person_id")
     private Persona cumplaniero;
 
-    @ManyToMany(mappedBy = "invitedTo")
+    @ManyToMany(fetch = FetchType.EAGER)
     @ToString.Exclude
     private Set<Persona> invitados;
+
+    public void addInvitado(Persona p){
+        invitados.add(p);
+    }
 }
